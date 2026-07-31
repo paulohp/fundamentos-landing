@@ -1,0 +1,14 @@
+quote: "Aprender com o mestre Afroragga é ampliar conhecimentos através de uma didática prática, transparente e de uma conduta impecável!"
+name: "Marquinhos MN"
+place: "Praia Grande"
+avatar: "images/testimonial-marquinhos.webp"
+
+written:
+  - name: "Marinho"
+    affiliation: "Rede Moinho"
+    quote: "Pra você que está começando, pega a metodologia da Escola do Flow, estuda, vai em frente, só tem a acrescentar no seu corre e na sua vida. A ideia é forte!"
+    avatar: "images/testimonial-marinho.webp"
+  - name: "Bruno Black"
+    affiliation: "Cria da Escola do Flow"
+    quote: "Escola do Flow é a faculdade de música que a gente não tem no Brasil ainda. Formadores de poetas, de beatmakers e formando pensamentos e visão!"
+    avatar: "images/testimonial-brunoblack.webp"

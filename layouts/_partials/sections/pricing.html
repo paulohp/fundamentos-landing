@@ -1,0 +1,26 @@
+{{ $final := .Params.final_cta }}
+<section class="pricing section section--light" id="matricula">
+  <div class="container pricing__box">
+    <p class="eyebrow">{{ site.Params.courseName }}</p>
+    <p class="pricing__old">De: R$ {{ site.Params.priceFull }}</p>
+    <p class="pricing__installments">{{ site.Params.priceInstallments }}</p>
+    <p class="pricing__cash">(é menos de R$ 200,00 à vista)</p>
+    <p class="pricing__lifetime">Acesso vitalício</p>
+    <p class="pricing__cash-label">Pagamento único de</p>
+    <p class="pricing__cash-value">R$ {{ site.Params.priceCash }}</p>
+    <a
+      href="{{ site.Params.checkoutUrl }}"
+      class="btn btn--primary btn--large"
+      data-track="checkout_click"
+      data-track-location="pricing"
+      >{{ $final.cta }}</a
+    >
+    <ul class="badge-list">
+      {{ range $final.badges }}
+      <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+    {{ with $final.paymentBadge }}{{ partial "img.html" (dict "src" . "alt"
+    "Pagamento seguro" "width" 320 "class" "pricing__payment-badge") }}{{ end }}
+  </div>
+</section>

@@ -1,0 +1,18 @@
+{{- $p := . -}}
+{{- $img := resources.Get $p.src -}}
+{{- if $img -}}
+  {{- $w1 := $p.width -}}
+  {{- $w2 := mul $w1 2 -}}
+  {{- $maxW := $img.Width -}}
+  {{- if gt $w2 $maxW -}}{{- $w2 = $maxW -}}{{- end -}}
+  {{- if gt $w1 $maxW -}}{{- $w1 = $maxW -}}{{- end -}}
+  {{- $webp1 := $img.Resize (printf "%dx webp q82" $w1) -}}
+  {{- $webp2 := $img.Resize (printf "%dx webp q82" $w2) -}}
+  {{- $jpg1 := $img.Resize (printf "%dx jpg q80" $w1) -}}
+  {{- $jpg2 := $img.Resize (printf "%dx jpg q80" $w2) -}}
+  {{- $height := div (mul $w1 $img.Height) $img.Width -}}
+  <picture>
+    <source type="image/webp" srcset="{{ $webp1.RelPermalink }} 1x, {{ $webp2.RelPermalink }} 2x">
+    <img src="{{ $jpg1.RelPermalink }}" srcset="{{ $jpg1.RelPermalink }} 1x, {{ $jpg2.RelPermalink }} 2x" width="{{ $w1 }}" height="{{ $height }}" alt="{{ $p.alt }}"{{ with $p.class }} class="{{ . }}"{{ end }} loading="{{ $p.loading | default "lazy" }}" decoding="async"{{ with $p.fetchpriority }} fetchpriority="{{ . }}"{{ end }}>
+  </picture>
+{{- end -}}

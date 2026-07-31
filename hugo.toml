@@ -1,0 +1,36 @@
+baseURL = 'https://fundamentosdorap.com.br/'
+locale = 'pt-BR'
+title = 'Fundamentos do Rap - Curso Online com Afroragga Flowman | Escola do Flow'
+
+disableKinds = ['taxonomy', 'term', 'RSS']
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 1
+
+[minify]
+  minifyOutput = true
+  [minify.tdewolff.html]
+    keepWhitespace = false
+
+[sitemap]
+  changeFreq = 'monthly'
+  priority = 1.0
+
+[params]
+  description = 'Aprenda ritmo, composição, flow e performance ao vivo com quem vive a cultura hip-hop. Curso Fundamentos do Rap, com Afroragga Flowman. Acesso vitalício.'
+  courseName = 'Fundamentos do Rap'
+  instructorName = 'Afroragga Flowman'
+  organization = 'Escola do Flow'
+  contentOwner = 'Contú Comunidade'
+  checkoutUrl = 'https://pay.hotmart.com/X102075630Q?off=qaz6b99w&hotfeature=51'
+  instagram = 'https://www.instagram.com/escoladoflow'
+  youtube = 'https://www.youtube.com/@escoladoflow'
+  tiktok = 'https://www.tiktok.com/@escoladoflow'
+  # Preencha com os IDs reais antes de publicar; scripts nao carregam se vazios.
+  fbPixelId = ''
+  gaId = ''
+  priceFull = '699,00'
+  priceInstallments = '12x de R$ 20,37'
+  priceCash = '197,00'
+  priceCashNumeric = '197.00'

@@ -1,0 +1,68 @@
+{{- $title := .Title -}} {{- $description := .Params.description | default
+site.Params.description -}} {{- $canonical := .Permalink -}} {{- $ogImage := ""
+-}} {{- with .Params.ogImage -}} {{- $img := resources.Get . -}} {{- if $img
+-}}{{- $ogImage = $img.Permalink -}}{{- end -}} {{- end -}}
+
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $description }}" />
+<link rel="canonical" href="{{ $canonical }}" />
+<meta name="robots" content="index, follow" />
+<link rel="icon" href="data:," />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:url" content="{{ $canonical }}" />
+<meta property="og:site_name" content="{{ site.Params.organization }}" />
+{{ with $ogImage }}<meta property="og:image" content="{{ . }}" />{{ end }}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:description" content="{{ $description }}" />
+{{ with $ogImage }}<meta name="twitter:image" content="{{ . }}" />{{ end }}
+
+<script type="application/ld+json">
+  {{- $course := dict
+    "@context" "https://schema.org"
+    "@type" "Course"
+    "name" site.Params.courseName
+    "description" $description
+    "provider" (dict
+      "@type" "Organization"
+      "name" site.Params.organization
+      "sameAs" (slice site.Params.instagram site.Params.youtube site.Params.tiktok)
+    )
+    "instructor" (dict
+      "@type" "Person"
+      "name" site.Params.instructorName
+    )
+    "hasCourseInstance" (dict
+      "@type" "CourseInstance"
+      "courseMode" "online"
+      "courseWorkload" "PT30H"
+    )
+    "offers" (dict
+      "@type" "Offer"
+      "url" site.Params.checkoutUrl
+      "priceCurrency" "BRL"
+      "price" site.Params.priceCashNumeric
+      "availability" "https://schema.org/InStock"
+      "category" "Digital"
+    )
+  -}}
+  {{ $course | jsonify }}
+</script>
+
+<script type="application/ld+json">
+  {{- $faqItems := slice -}}
+  {{- range hugo.Data.faq -}}
+    {{- $faqItems = $faqItems | append (dict
+      "@type" "Question"
+      "name" .question
+      "acceptedAnswer" (dict "@type" "Answer" "text" .answer)
+    ) -}}
+  {{- end -}}
+  {{- $faqPage := dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $faqItems -}}
+  {{ $faqPage | jsonify }}
+</script>

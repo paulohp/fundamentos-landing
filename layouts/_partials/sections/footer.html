@@ -1,0 +1,28 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    {{ partial "img.html" (dict "src" "images/logo.webp" "alt" "Escola do Flow"
+    "width" 140 "class" "site-footer__logo") }}
+    <p class="site-footer__title">Entre em contato e nos acompanhe!</p>
+    <ul class="site-footer__social">
+      <li>
+        <a href="{{ site.Params.instagram }}" rel="noopener"
+          >Instagram: @escoladoflow</a
+        >
+      </li>
+      <li>
+        <a href="{{ site.Params.youtube }}" rel="noopener"
+          >YouTube: @escoladoflow</a
+        >
+      </li>
+      <li>
+        <a href="{{ site.Params.tiktok }}" rel="noopener"
+          >TikTok: @escoladoflow</a
+        >
+      </li>
+    </ul>
+    <p class="site-footer__copy">
+      &copy; {{ now.Year }} {{ site.Params.contentOwner }} &middot; Todos os
+      direitos reservados.
+    </p>
+  </div>
+</footer>

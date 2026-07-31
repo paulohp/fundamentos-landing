@@ -1,0 +1,28 @@
+{{ $hero := .Params.hero }}
+<section class="hero section section--dark">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow">
+        {{ $hero.eyebrow }} <strong>{{ $hero.instructor }}</strong>
+      </p>
+      <h1 class="hero__headline">{{ $hero.headline }}</h1>
+      <p class="hero__subheadline">{{ $hero.subheadline }}</p>
+      <ul class="hero__bullets">
+        {{ range $hero.bullets }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+      <a
+        href="{{ site.Params.checkoutUrl }}"
+        class="btn btn--primary btn--large"
+        data-track="checkout_click"
+        data-track-location="hero"
+        >{{ $hero.cta }}</a
+      >
+    </div>
+    <div class="hero__media">
+      {{ partial "img.html" (dict "src" $hero.image "alt" $hero.imageAlt "width"
+      640 "class" "hero__image" "loading" "eager" "fetchpriority" "high") }}
+    </div>
+  </div>
+</section>

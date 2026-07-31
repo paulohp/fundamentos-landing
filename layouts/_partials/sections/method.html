@@ -1,0 +1,25 @@
+{{ $method := .Params.method }}
+<section class="method section section--light">
+  <div class="container method__grid">
+    <div class="method__media">
+      <div class="stat-block">
+        <span class="stat-block__number">20</span>
+        <span class="stat-block__label"
+          >anos de experiência<br />na cultura Hip Hop</span
+        >
+        <span class="stat-block__badge">Chancelado pelo YouTube Educação</span>
+      </div>
+    </div>
+    <div class="method__content">
+      <h2>{{ $method.headline }}</h2>
+      <p>{{ $method.body }}</p>
+      <a
+        href="{{ site.Params.checkoutUrl }}"
+        class="btn btn--primary"
+        data-track="checkout_click"
+        data-track-location="method"
+        >{{ $method.cta }}</a
+      >
+    </div>
+  </div>
+</section>

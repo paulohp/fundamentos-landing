@@ -1,0 +1,13 @@
+<section class="faq section section--dark" id="duvidas">
+  <div class="container">
+    <h2 class="section__title">Ainda em dúvidas?</h2>
+    <div class="faq-list">
+      {{ range hugo.Data.faq }}
+      <details class="faq-item">
+        <summary>{{ .question }}</summary>
+        <p>{{ .answer }}</p>
+      </details>
+      {{ end }}
+    </div>
+  </div>
+</section>

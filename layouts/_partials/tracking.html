@@ -1,0 +1,21 @@
+{{/* Carrega GA4 (com Consent Mode v2, default denied) e Meta Pixel somente após
+consentimento do usuário (banner em cookie-consent.html + assets/js/consent.js).
+Nao renderiza nada se os IDs nao estiverem preenchidos em hugo.toml [params].
+*/}} {{ $gaId := site.Params.gaId }} {{ $fbPixelId := site.Params.fbPixelId }}
+{{ if or $gaId $fbPixelId }}
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
+
+  window.__trackingConfig = {
+    gaId: {{ $gaId | jsonify }},
+    fbPixelId: {{ $fbPixelId | jsonify }}
+  };
+</script>
+{{ end }}

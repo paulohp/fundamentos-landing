@@ -1,0 +1,29 @@
+{{ $curriculum := .Params.curriculum }}
+<section class="curriculum section section--dark" id="curriculo">
+  <div class="container">
+    <p class="eyebrow">{{ $curriculum.eyebrow }}</p>
+    <h2 class="section__title">O que você vai aprender</h2>
+    <ol class="module-list">
+      {{ range hugo.Data.modules }}
+      <li class="module-card">
+        <span class="module-card__number">{{ .number }}</span>
+        <div>
+          <h3 class="module-card__title">{{ .title }}</h3>
+          <p class="module-card__desc">{{ .description }}</p>
+        </div>
+      </li>
+      {{ end }}
+    </ol>
+
+    <div class="masterclass-list">
+      {{ range $i, $m := hugo.Data.masterclasses }}
+      <div class="masterclass-card">
+        <span class="masterclass-card__tag"
+          >Bônus · Masterclass {{ add $i 1 }}</span
+        >
+        <h3>{{ $m.title }}</h3>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+{{ $t := hugo.Data.testimonials }}
+<section class="testimonials section section--light">
+  <div class="container">
+    <blockquote class="quote-card">
+      {{ with $t.avatar }}{{ partial "img.html" (dict "src" . "alt" $t.name
+      "width" 96 "class" "quote-card__avatar") }}{{ end }}
+      <p class="quote-card__text">&ldquo;{{ $t.quote }}&rdquo;</p>
+      <footer class="quote-card__author">{{ $t.name }}, {{ $t.place }}</footer>
+    </blockquote>
+
+    <h2 class="section__title">O que dizem os alunos da Escola do Flow</h2>
+    <div class="testimonial-grid">
+      {{ range $item := $t.written }}
+      <blockquote class="testimonial-card">
+        {{ with $item.avatar }}{{ partial "img.html" (dict "src" . "alt"
+        $item.name "width" 72 "class" "testimonial-card__avatar") }}{{ end }}
+        <p>{{ $item.quote }}</p>
+        <footer>{{ $item.name }} <span>· {{ $item.affiliation }}</span></footer>
+      </blockquote>
+      {{ end }}
+    </div>
+  </div>
+</section>
