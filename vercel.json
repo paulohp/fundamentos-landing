@@ -1,9 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "hugo",
-  "buildCommand": "hugo --gc",
+  "buildCommand": "hugo --gc --minify",
   "outputDirectory": "public",
-  "env": {
-    "HUGO_VERSION": "0.164.0"
+  "trailingSlash": false,
+  "build": {
+    "env": {
+      "HUGO_VERSION": "0.164.0"
+    }
   }
 }
