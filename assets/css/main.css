@@ -209,6 +209,7 @@ ol {
 .brand__logo {
   width: 126px;
   height: 42px;
+  max-width: none;
   flex-shrink: 0;
 }
 .brand__course {
@@ -533,6 +534,7 @@ ol {
 .site-footer__logo {
   width: 108px;
   height: 36px;
+  max-width: none;
   margin-bottom: 1.25rem;
 }
 .site-footer__title {
