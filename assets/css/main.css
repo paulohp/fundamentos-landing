@@ -7,8 +7,10 @@
   --dark: #16130f;
   --dark-2: #221c15;
   --accent: #e1272f;
+  --accent-dark: #a11d24;
   --accent-ink: #ffffff;
   --gold: #f0b429;
+  --muted: #4a453a;
   --line: var(--ink);
   --shadow-offset: 6px;
   --font-display: "Archivo Black", "Arial Black", sans-serif;
@@ -129,6 +131,9 @@ ol {
   color: var(--gold);
   margin-bottom: 0.75rem;
 }
+.section--light .eyebrow {
+  color: var(--accent-dark);
+}
 
 /* Buttons — sombra dura, sem gradiente, estilo cartaz */
 .btn {
@@ -202,8 +207,9 @@ ol {
   line-height: 1.1;
 }
 .brand__logo {
+  width: 126px;
   height: 42px;
-  width: auto;
+  flex-shrink: 0;
 }
 .brand__course {
   font-family: var(--font-display);
@@ -391,7 +397,7 @@ ol {
 }
 .quote-card__author {
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-dark);
 }
 
 .testimonial-grid {
@@ -469,7 +475,7 @@ ol {
 }
 .pricing__old {
   text-decoration: line-through;
-  opacity: 0.6;
+  color: var(--muted);
   margin-bottom: 0.25rem;
 }
 .pricing__installments {
@@ -479,7 +485,7 @@ ol {
 }
 .pricing__cash {
   font-size: 0.85rem;
-  opacity: 0.7;
+  color: var(--muted);
 }
 .pricing__lifetime {
   display: inline-block;
@@ -525,8 +531,8 @@ ol {
   border-top: 3px solid var(--gold);
 }
 .site-footer__logo {
+  width: 108px;
   height: 36px;
-  width: auto;
   margin-bottom: 1.25rem;
 }
 .site-footer__title {
