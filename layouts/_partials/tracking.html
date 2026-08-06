@@ -14,8 +14,8 @@ Nao renderiza nada se os IDs nao estiverem preenchidos em hugo.toml [params].
   });
 
   window.__trackingConfig = {
-    gaId: {{ $gaId | jsonify }},
-    fbPixelId: {{ $fbPixelId | jsonify }}
+    gaId: {{ $gaId | jsonify | safeJS }},
+    fbPixelId: {{ $fbPixelId | jsonify | safeJS }}
   };
 </script>
 {{ end }}
