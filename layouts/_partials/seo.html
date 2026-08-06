@@ -51,7 +51,7 @@ site.Params.description -}} {{- $canonical := .Permalink -}} {{- $ogImage := ""
       "category" "Digital"
     )
   -}}
-  {{ $course | jsonify }}
+  {{ $course | jsonify | safeJS }}
 </script>
 
 <script type="application/ld+json">
@@ -64,5 +64,5 @@ site.Params.description -}} {{- $canonical := .Permalink -}} {{- $ogImage := ""
     ) -}}
   {{- end -}}
   {{- $faqPage := dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $faqItems -}}
-  {{ $faqPage | jsonify }}
+  {{ $faqPage | jsonify | safeJS }}
 </script>
