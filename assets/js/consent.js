@@ -1,9 +1,8 @@
 (function () {
-  var CONSENT_KEY = "fdr_consent";
+  var DISCLOSURE_KEY = "fdr_disclosure_seen";
   var cfg = window.__trackingConfig || {};
   var banner = document.getElementById("cookie-consent");
-  var acceptBtn = document.getElementById("cookie-accept");
-  var declineBtn = document.getElementById("cookie-decline");
+  var dismissBtn = document.getElementById("cookie-dismiss");
 
   function loadGtag() {
     if (!cfg.gaId || window.__gaLoaded) return;
@@ -61,24 +60,20 @@
     loadPixel();
   }
 
-  var stored = localStorage.getItem(CONSENT_KEY);
-  if (stored === "granted") {
-    grantConsent();
-  } else if (!stored && banner && (cfg.gaId || cfg.fbPixelId)) {
+  // Tracking starts immediately; banner below is informational only, not a gate.
+  grantConsent();
+
+  if (
+    banner &&
+    (cfg.gaId || cfg.fbPixelId) &&
+    !localStorage.getItem(DISCLOSURE_KEY)
+  ) {
     banner.hidden = false;
   }
 
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem(CONSENT_KEY, "granted");
-      grantConsent();
-      if (banner) banner.hidden = true;
-    });
-  }
-
-  if (declineBtn) {
-    declineBtn.addEventListener("click", function () {
-      localStorage.setItem(CONSENT_KEY, "denied");
+  if (dismissBtn) {
+    dismissBtn.addEventListener("click", function () {
+      localStorage.setItem(DISCLOSURE_KEY, "1");
       if (banner) banner.hidden = true;
     });
   }

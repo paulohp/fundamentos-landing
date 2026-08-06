@@ -1,8 +1,8 @@
-{{/* Carrega GA4 (com Consent Mode v2, default denied) e Meta Pixel somente após
-consentimento do usuário (banner em cookie-consent.html + assets/js/consent.js).
-Nao renderiza nada se os IDs nao estiverem preenchidos em hugo.toml [params].
-*/}} {{ $gaId := site.Params.gaId }} {{ $fbPixelId := site.Params.fbPixelId }}
-{{ if or $gaId $fbPixelId }}
+{{/* Carrega GA4 (com Consent Mode v2, ja concedido) e Meta Pixel imediatamente.
+O banner em cookie-consent.html + assets/js/consent.js e apenas informativo, nao
+bloqueia o carregamento dos scripts. Nao renderiza nada se os IDs nao estiverem
+preenchidos em hugo.toml [params]. */}} {{ $gaId := site.Params.gaId }} {{
+$fbPixelId := site.Params.fbPixelId }} {{ if or $gaId $fbPixelId }}
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
