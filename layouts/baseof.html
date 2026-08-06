@@ -34,9 +34,10 @@
   {{ partial "sections/footer.html" . }}
   {{ partial "cookie-consent.html" . }}
 
+  {{ partial "tracking.html" . }}
+
   {{ $consent := resources.Get "js/consent.js" }}
   {{ if hugo.IsProduction }}{{ $consent = $consent | minify }}{{ end }}
-  <script defer>{{ $consent.Content | safeJS }}</script>
-  {{ partial "tracking.html" . }}
+  <script>{{ $consent.Content | safeJS }}</script>
 </body>
 </html>
