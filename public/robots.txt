@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fundamentosdorap.com.br/sitemap.xml
+Sitemap: http://localhost:1414/sitemap.xml
