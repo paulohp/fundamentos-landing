@@ -28,7 +28,7 @@ enableRobotsTXT = true
   youtube = 'https://www.youtube.com/@escoladoflow'
   tiktok = 'https://www.tiktok.com/@escoladoflow'
   # Preencha com os IDs reais antes de publicar; scripts nao carregam se vazios.
-  fbPixelId = ''
+  fbPixelId = '3378916922255354'
   gaId = ''
   priceFull = '699,00'
   priceInstallments = '12x de R$ 20,37'
