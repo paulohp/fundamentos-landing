@@ -1,8 +1,13 @@
 {{/* Carrega GA4 (com Consent Mode v2, ja concedido) e Meta Pixel imediatamente.
 O banner em cookie-consent.html + assets/js/consent.js e apenas informativo, nao
 bloqueia o carregamento dos scripts. Nao renderiza nada se os IDs nao estiverem
-preenchidos em hugo.toml [params]. */}} {{ $gaId := site.Params.gaId }} {{
-$fbPixelId := site.Params.fbPixelId }} {{ if or $gaId $fbPixelId }}
+preenchidos em hugo.toml [params]. Meta Conversions API (CAPI): o consent.js
+tambem envia eventos para o endpoint /api/meta-capi (serverless no Vercel), que
+encaminha para a API do Meta. Isso garante tracking mesmo com ad blockers.
+Variaveis de ambiente necessarias no Vercel: META_CAPI_TOKEN (Access Token da
+Conversions API) e META_PIXEL_ID (opcional — usa o fbPixelId dos params como
+fallback). */}} {{ $gaId := site.Params.gaId }} {{ $fbPixelId :=
+site.Params.fbPixelId }} {{ if or $gaId $fbPixelId }}
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }

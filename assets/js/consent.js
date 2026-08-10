@@ -4,6 +4,37 @@
   var banner = document.getElementById("cookie-consent");
   var dismissBtn = document.getElementById("cookie-dismiss");
 
+  /* -----------------------------------------------------------------------
+     Meta Conversions API (CAPI) — server-side event relay
+  ----------------------------------------------------------------------- */
+
+  function sendCapi(eventName, extra) {
+    if (!cfg.fbPixelId) return;
+    extra = extra || {};
+    var payload = {
+      eventName: eventName,
+      eventId: extra.eventId || eventName + "_" + Date.now(),
+      pixelId: cfg.fbPixelId,
+      url: window.location.href,
+      userData: {},
+      customData: extra.customData || {},
+    };
+    // Best-effort — fire-and-forget, never block the UI.
+    // keepalive ensures the request completes even if the user navigates away.
+    fetch("/api/meta-capi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(function () {
+      /* silently ignore network errors */
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+     Google Analytics (GA4) via gtag
+  ----------------------------------------------------------------------- */
+
   function loadGtag() {
     if (!cfg.gaId || window.__gaLoaded) return;
     window.__gaLoaded = true;
@@ -14,6 +45,10 @@
     gtag("js", new Date());
     gtag("config", cfg.gaId, { anonymize_ip: true });
   }
+
+  /* -----------------------------------------------------------------------
+     Meta Pixel (client-side)
+  ----------------------------------------------------------------------- */
 
   function loadPixel() {
     if (!cfg.fbPixelId || window.__fbLoaded) return;
@@ -47,6 +82,10 @@
     fbq("track", "PageView");
   }
 
+  /* -----------------------------------------------------------------------
+     Consent — grants everything immediately (banner is informational)
+  ----------------------------------------------------------------------- */
+
   function grantConsent() {
     if (typeof gtag === "function") {
       gtag("consent", "update", {
@@ -58,10 +97,16 @@
     }
     loadGtag();
     loadPixel();
+    // Also fire server-side PageView so CAPI catches what the Pixel might miss.
+    sendCapi("PageView");
   }
 
   // Tracking starts immediately; banner below is informational only, not a gate.
   grantConsent();
+
+  /* -----------------------------------------------------------------------
+     Cookie-consent banner (purely informational)
+  ----------------------------------------------------------------------- */
 
   if (
     banner &&
@@ -78,11 +123,16 @@
     });
   }
 
+  /* -----------------------------------------------------------------------
+     Checkout CTA clicks — fire both Pixel + CAPI + GA4
+  ----------------------------------------------------------------------- */
+
   var ctaEls = document.querySelectorAll('[data-track="checkout_click"]');
   for (var i = 0; i < ctaEls.length; i++) {
     ctaEls[i].addEventListener("click", function () {
       if (typeof fbq === "function") fbq("track", "InitiateCheckout");
       if (typeof gtag === "function") gtag("event", "begin_checkout");
+      sendCapi("InitiateCheckout", { eventId: "chk_" + Date.now() });
     });
   }
 })();

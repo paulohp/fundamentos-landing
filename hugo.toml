@@ -27,9 +27,14 @@ enableRobotsTXT = true
   instagram = 'https://www.instagram.com/escoladoflow'
   youtube = 'https://www.youtube.com/@escoladoflow'
   tiktok = 'https://www.tiktok.com/@escoladoflow'
-  # Preencha com os IDs reais antes de publicar; scripts nao carregam se vazios.
+  # Meta Pixel ID — usado pelo Pixel client-side E enviado ao endpoint CAPI.
+  # Preencha com o ID real antes de publicar; scripts nao carregam se vazio.
   fbPixelId = '3378916922255354'
+  # Google Analytics GA4 Measurement ID (opcional — deixe vazio para desligar).
   gaId = ''
+  # Meta Conversions API (CAPI): requer META_CAPI_TOKEN configurado como
+  # environment variable no Vercel Dashboard (Project > Settings > Environment Variables).
+  # Sem isso o endpoint /api/meta-capi funciona mas devolve { skipped: true }.
   priceFull = '699,00'
   priceInstallments = '12x de R$ 20,37'
   priceCash = '197,00'
