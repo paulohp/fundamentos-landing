@@ -16,7 +16,9 @@
       eventId: extra.eventId || eventName + "_" + Date.now(),
       pixelId: cfg.fbPixelId,
       url: window.location.href,
-      userData: {},
+      userData: {
+        userAgent: navigator.userAgent,
+      },
       customData: extra.customData || {},
     };
     // Best-effort — fire-and-forget, never block the UI.

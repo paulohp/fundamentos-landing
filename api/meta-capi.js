@@ -99,7 +99,20 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: "eventName is required" });
     }
 
-    const payload = buildPayload(eventName, eventData || {}, pixelId, token);
+    // Merge the real client IP from Vercel's headers into userData.
+    const ip =
+      req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
+      req.headers["x-real-ip"] ||
+      req.socket?.remoteAddress ||
+      "";
+    const userData = { ...(eventData.userData || {}), ip };
+
+    const payload = buildPayload(
+      eventName,
+      { ...eventData, userData },
+      pixelId,
+      token,
+    );
     const metaUrl = `https://graph.facebook.com/v22.0/${pixelId}/events`;
 
     const metaRes = await fetch(metaUrl, {
