@@ -83,8 +83,17 @@
   }
 
   /* -----------------------------------------------------------------------
-     Consent — grants everything immediately (banner is informational)
+     Deferred execution — run tracking only when the browser is idle
+     so it never blocks rendering or the main thread.
   ----------------------------------------------------------------------- */
+
+  function runWhenIdle(fn) {
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(fn, { timeout: 2000 });
+    } else {
+      setTimeout(fn, 500);
+    }
+  }
 
   function grantConsent() {
     if (typeof gtag === "function") {
@@ -101,8 +110,8 @@
     sendCapi("PageView");
   }
 
-  // Tracking starts immediately; banner below is informational only, not a gate.
-  grantConsent();
+  // Defer ALL tracking until the browser is idle.
+  runWhenIdle(grantConsent);
 
   /* -----------------------------------------------------------------------
      Cookie-consent banner (purely informational)
