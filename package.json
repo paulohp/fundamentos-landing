@@ -1,4 +1,9 @@
 {
+  "private": true,
+  "scripts": {
+    "lh": "npx lighthouse https://www.fundamentosdorap.com.br --view --quiet",
+    "lh:score": "npx lighthouse https://www.fundamentosdorap.com.br --output=json --output-path=./lighthouse-report.json --quiet && node -e \"const r=require('./lighthouse-report.json');console.log('Performance:',r.categories.performance.score*100,'| Acess.:',r.categories.accessibility.score*100,'| Boas Prat.:',r.categories['best-practices'].score*100,'| SEO:',r.categories.seo.score*100)\""
+  },
   "dependencies": {
     "vercel": "^58.9.0"
   }
