@@ -30,6 +30,10 @@ enableRobotsTXT = true
   # Meta Pixel ID — usado pelo Pixel client-side E enviado ao endpoint CAPI.
   # Preencha com o ID real antes de publicar; scripts nao carregam se vazio.
   fbPixelId = '3378916922255354'
+  # Codigo de teste de eventos do Meta Ads (opcional — deixe vazio para desligar).
+  # Quando preenchido, o Pixel opera em modo de teste e os eventos aparecem
+  # rapidamente no Events Manager para validacao. Ex: 'TEST60965'.
+  fbTestCode = 'TEST60965'
   # Google Analytics GA4 Measurement ID (opcional — deixe vazio para desligar).
   gaId = ''
   # Meta Conversions API (CAPI): requer META_CAPI_TOKEN configurado como

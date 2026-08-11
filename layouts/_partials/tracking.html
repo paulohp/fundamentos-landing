@@ -20,7 +20,8 @@ site.Params.fbPixelId }} {{ if or $gaId $fbPixelId }}
 
   window.__trackingConfig = {
     gaId: {{ $gaId | jsonify | safeJS }},
-    fbPixelId: {{ $fbPixelId | jsonify | safeJS }}
+    fbPixelId: {{ $fbPixelId | jsonify | safeJS }},
+    fbTestCode: {{ site.Params.fbTestCode | jsonify | safeJS }}
   };
 </script>
 {{ end }}

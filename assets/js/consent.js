@@ -80,7 +80,7 @@
       "https://connect.facebook.net/en_US/fbevents.js",
     );
     /* eslint-enable */
-    fbq("init", cfg.fbPixelId);
+    fbq("init", cfg.fbPixelId, cfg.fbTestCode ? { testEventCode: cfg.fbTestCode } : {});
     fbq("track", "PageView");
   }
 
